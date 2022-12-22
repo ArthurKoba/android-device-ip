@@ -1,0 +1,24 @@
+<resources>
+    <string name="appName">IP адрес устройства</string>
+    <string name="tabMain">Главная</string>
+    <string name="tabHistory">История</string>
+
+    <string name="actualIpAddress">Текущий IP:</string>
+    <string name="lastIpAddress">Последний IP:</string>
+    <string name="updateIpAddress">Обновить IP адрес</string>
+    <string name="unknown">неизвестно</string>
+    <string name="loading">загрузка…</string>
+    <string name="failedGetAddress">ошибка получения данных!</string>
+
+
+
+
+
+    <string name="tabTest">Тест</string>
+    <string name="test_button">Тестовая кнопка</string>
+
+    <string name="test_text_view">TextView</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
