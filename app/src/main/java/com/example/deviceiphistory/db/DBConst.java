@@ -9,6 +9,7 @@ public final class DBConst {
     public static final int DB_VERSION = 1;
 
     public static final String CLEAR_TABLE = "DELETE FROM " + TABLE_NAME;
+    public static final String ORDER_ADDRESSES = _ID + " DESC";
     public static final String TABLE_STRUCTURE = "CREATE TABLE IF NOT EXISTS " +
             TABLE_NAME + " (" + _ID + " INTEGER PRIMARY KEY," +
             COLUMN_NAME_ADDRESS + " TEXT)";
