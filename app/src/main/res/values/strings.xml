@@ -10,9 +10,8 @@
     <string name="loading">загрузка…</string>
     <string name="failed_get_ip">ошибка получения данных!</string>
 
-
-
-
+    <string name="get_history">Получить историю</string>
+    <string name="clear_history">Очистить историю</string>
 
     <string name="tabTest">Тест</string>
     <string name="test_button">Тестовая кнопка</string>

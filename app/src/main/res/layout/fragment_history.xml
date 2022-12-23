@@ -11,34 +11,36 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/getHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/actual_ip"
+            android:text="@string/get_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/clearHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="@+id/button"
+            android:layout_marginTop="28dp"
+            android:text="@string/clear_history"
+            app:layout_constraintEnd_toEndOf="@+id/getHistory"
             app:layout_constraintHorizontal_bias="0.487"
-            app:layout_constraintStart_toStartOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintStart_toStartOf="@+id/getHistory"
+            app:layout_constraintTop_toBottomOf="@+id/getHistory" />
 
         <ListView
+            android:id="@+id/historyList"
             android:layout_width="334dp"
             android:layout_height="381dp"
             android:layout_marginTop="28dp"
-            app:layout_constraintEnd_toEndOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="@+id/clearHistory"
             app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="@+id/button2"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintStart_toStartOf="@+id/clearHistory"
+            app:layout_constraintTop_toBottomOf="@+id/clearHistory" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
