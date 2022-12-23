@@ -1,7 +1,5 @@
 package com.example.deviceiphistory.ui.main;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.os.Bundle;
 

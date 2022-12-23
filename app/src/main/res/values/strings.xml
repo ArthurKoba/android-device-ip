@@ -1,14 +1,14 @@
 <resources>
-    <string name="appName">IP адрес устройства</string>
-    <string name="tabMain">Главная</string>
-    <string name="tabHistory">История</string>
+    <string name="app_name">IP адрес устройства</string>
+    <string name="tab_main">Главная</string>
+    <string name="tab_history">История</string>
 
-    <string name="actualIpAddress">Текущий IP:</string>
-    <string name="lastIpAddress">Последний IP:</string>
-    <string name="updateIpAddress">Обновить IP адрес</string>
+    <string name="actual_ip">Текущий IP:</string>
+    <string name="last_Ip">Последний IP:</string>
+    <string name="update_ip">Обновить IP адрес</string>
     <string name="unknown">неизвестно</string>
     <string name="loading">загрузка…</string>
-    <string name="failedGetAddress">ошибка получения данных!</string>
+    <string name="failed_get_ip">ошибка получения данных!</string>
 
 
 

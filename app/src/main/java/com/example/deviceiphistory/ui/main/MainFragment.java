@@ -29,12 +29,12 @@ public class MainFragment extends Fragment {
     }
 
     public static MainFragment newInstance(Context context) {
-        //Вот тут нужно получить ссылку на объект, чтобы его пробросить в конструктор
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +58,12 @@ public class MainFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public void setActualAddress(String ip) {
-        actualAddressView.setText(getString(R.string.actualIpAddress) + " " + ip);
+        actualAddressView.setText(getString(R.string.actual_ip) + " " + ip);
     }
 
     @SuppressLint("SetTextI18n")
     public void setLastAddress(String ip) {
-        lastAddressView.setText(getString(R.string.lastIpAddress) + " " + ip);
+        lastAddressView.setText(getString(R.string.last_Ip) + " " + ip);
     }
 
     private void initElements(View view) {
@@ -87,7 +87,7 @@ public class MainFragment extends Fragment {
         if (actualAddress.length() != 0) {
             setActualAddress(actualAddress);
         } else {
-            setActualAddress(getString(R.string.failedGetAddress));
+            setActualAddress(getString(R.string.failed_get_ip));
         }
 
     }
