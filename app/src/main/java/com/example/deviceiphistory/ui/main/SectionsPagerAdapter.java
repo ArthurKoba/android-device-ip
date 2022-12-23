@@ -15,7 +15,7 @@ import com.example.deviceiphistory.R;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter {
+public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{
@@ -24,13 +24,13 @@ public class SectionsPagerAdapter {
     private final Context context;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
+        super(fm);
         this.context = context;
     }
 
     @NonNull
+    @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position) {
 //            case 0: return MainFragment.newInstance(this.context);
             case 1: return HistoryFragment.newInstance(context);
@@ -40,10 +40,12 @@ public class SectionsPagerAdapter {
     }
 
     @Nullable
+    @Override
     public CharSequence getPageTitle(int position) {
         return context.getResources().getString(TAB_TITLES[position]);
     }
 
+    @Override
     public int getCount() {
         return 3;
     }
