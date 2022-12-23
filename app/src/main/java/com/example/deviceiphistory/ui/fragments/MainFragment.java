@@ -1,11 +1,11 @@
-package com.example.deviceiphistory.ui.main;
+package com.example.deviceiphistory.ui.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +28,7 @@ public class MainFragment extends Fragment {
         apiService = ApiService.getInstance();
     }
 
-    public static MainFragment newInstance(Context context) {
+    public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -56,6 +56,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("Events", "focus to main");
 //        clickUpdateAddress();
     }
 
@@ -79,5 +80,4 @@ public class MainFragment extends Fragment {
         }
 
     }
-
 }

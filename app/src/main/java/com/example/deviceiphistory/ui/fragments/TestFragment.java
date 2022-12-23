@@ -1,4 +1,4 @@
-package com.example.deviceiphistory.ui.main;
+package com.example.deviceiphistory.ui.fragments;
 
 import android.os.Bundle;
 
@@ -49,11 +49,18 @@ public class TestFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Events", "focus to test");
+    }
+
     private void click() {
         String input = inputText.getText().toString();
         if (input.length() == 0) return;
         Log.d("Test", input);
-//        testText.setText("lol");
-//        apiService
+        apiService.writeNewIp(input);
+        apiService.getHistory();
+
     }
 }

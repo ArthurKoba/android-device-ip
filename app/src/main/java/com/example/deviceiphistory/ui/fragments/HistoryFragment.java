@@ -1,5 +1,6 @@
-package com.example.deviceiphistory.ui.main;
+package com.example.deviceiphistory.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -9,11 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.deviceiphistory.ApiService;
 import com.example.deviceiphistory.R;
+
+import java.util.List;
 
 
 public class HistoryFragment extends Fragment {
@@ -21,13 +25,19 @@ public class HistoryFragment extends Fragment {
     Button clearHistoryButton;
     ListView historyListView;
     ApiService apiService;
+    Context context;
 
     public static HistoryFragment newInstance(Context context) {
-        return new HistoryFragment();
+        HistoryFragment fragment = new HistoryFragment(context);
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
-    public HistoryFragment() {
-//        apiService = ApiService.getInstance();
+
+    public HistoryFragment(Context context) {
+        apiService = ApiService.getInstance();
+        this.context = context;
     }
 
     @Override
@@ -44,16 +54,30 @@ public class HistoryFragment extends Fragment {
         historyListView = view.findViewById(R.id.historyList);
         getHistoryButton.setOnClickListener(v -> getHistory());
         clearHistoryButton.setOnClickListener(v -> clearHistory());
+
         return view;
     }
 
-    private void getHistory() {
-        Log.d("History", "click get");
+    @Override
+    public void onResume() {
+        super.onResume();
+        getHistory();
+    }
 
+    private void getHistory() {
+        List<String> history = apiService.getHistory();
+        if (history.isEmpty()) {
+            history.add(getString(R.string.history_empty));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                context, android.R.layout.simple_list_item_1, history
+        );
+        historyListView.setAdapter(adapter);
     }
 
     private void clearHistory() {
-        Log.d("History", "click clear");
+        apiService.clearHistory();
+        getHistory();
     }
 
 
