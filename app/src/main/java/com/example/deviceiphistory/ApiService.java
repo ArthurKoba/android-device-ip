@@ -71,7 +71,9 @@ public class ApiService {
         String response = request();
         try {
             JSONObject jsonObject = new JSONObject(response);
-            return jsonObject.getString("ip");
+            String actualIp = jsonObject.getString("ip");
+            writeNewIp(actualIp);
+            return actualIp;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -89,23 +91,26 @@ public class ApiService {
     public String getLastIp() {
         try {
             openDb();
-            List<String> listIp = getHistory();
-            for (String ip: listIp) {
-                Log.d("Api", "DB ip: " + ip);
+            Cursor cursor = db.query(DBConst.TABLE_NAME,null, null,
+                    null, null,null, DBConst.ORDER_ADDRESSES, "1");
+            if (cursor.getCount() == 1) {
+                cursor.moveToFirst();
+                @SuppressLint("Range") String address = cursor.getString(
+                        cursor.getColumnIndex(DBConst.COLUMN_NAME_ADDRESS)
+                );
+                Log.d("Api", address);
+                return address;
             }
-            if (!listIp.isEmpty()) {
-                return listIp.get(0);
-            }
+            cursor.close();
         } finally {
             closeDb();
         }
-
         return "";
     }
 
     public void writeNewIp(String ip) {
         if (ip.length() == 0) return;
-        Log.d("Api", "write ip to db: " + ip);
+        if (ip.equals(getLastIp())) return;
         try {
             openDb();
             ContentValues values = new ContentValues();
@@ -121,7 +126,7 @@ public class ApiService {
             openDb();
             List<String> listAddresses = new ArrayList<>();
             Cursor cursor = db.query(DBConst.TABLE_NAME,null, null,
-                    null, null,null, null);
+                    null, null,null, DBConst.ORDER_ADDRESSES);
             while (cursor.moveToNext()) {
                 @SuppressLint("Range") String address = cursor.getString(
                         cursor.getColumnIndex(DBConst.COLUMN_NAME_ADDRESS)

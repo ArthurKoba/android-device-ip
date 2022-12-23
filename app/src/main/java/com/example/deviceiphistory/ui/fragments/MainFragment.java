@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +55,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Events", "focus to main");
-//        clickUpdateAddress();
+        updateLastIp();
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,14 +68,21 @@ public class MainFragment extends Fragment {
         lastAddressView.setText(getString(R.string.last_Ip) + " " + ip);
     }
 
+    public void updateLastIp() {
+        String lastIp = apiService.getLastIp();
+        if (lastIp.length() != 0) {
+            setLastAddress(lastIp);
+        }
+    }
+
     private void clickUpdateAddress() {
         setActualAddress(getString(R.string.loading));
         String actualAddress = apiService.getIp();
         if (actualAddress.length() != 0) {
             setActualAddress(actualAddress);
+            updateLastIp();
         } else {
             setActualAddress(getString(R.string.failed_get_ip));
         }
-
     }
 }
