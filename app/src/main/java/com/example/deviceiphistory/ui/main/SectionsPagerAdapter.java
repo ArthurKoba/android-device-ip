@@ -15,21 +15,19 @@ import com.example.deviceiphistory.R;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{
-            R.string.tab_main, R.string.tab_history, R.string.tabTest
+            R.string.tab_main, R.string.tab_history, R.string.tab_test
     };
     private final Context context;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
-        super(fm);
         this.context = context;
     }
 
     @NonNull
-    @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
@@ -42,14 +40,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Nullable
-    @Override
     public CharSequence getPageTitle(int position) {
         return context.getResources().getString(TAB_TITLES[position]);
     }
 
-    @Override
     public int getCount() {
-        // Show 2 total pages.
         return 3;
     }
 }
