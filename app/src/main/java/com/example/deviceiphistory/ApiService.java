@@ -1,6 +1,10 @@
 package com.example.deviceiphistory;
 
+import android.content.Context;
 import android.os.StrictMode;
+
+import com.example.deviceiphistory.db.DbManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -12,27 +16,34 @@ import java.net.URL;
 
 
 public class ApiService {
-    String baseUrl = "https://api.ipify.org/?format=json";
+    private final DbManager manager;
+    private static ApiService INSTANCE = null;
 
-    public static final ApiService INSTANCE = new ApiService();
 
-    private ApiService() {}
+    private ApiService(Context context) {
+        manager = new DbManager(context);
+    }
+
+    public static ApiService newInstance(Context context) {
+        if (INSTANCE == null) INSTANCE = new ApiService(context);
+        return INSTANCE;
+    }
 
     public static ApiService getInstance(){
         return INSTANCE;
     }
 
     private String request() {
+        String baseUrl = "https://api.ipify.org/?format=json";
         HttpURLConnection connection = null;
-        BufferedReader reader = null;
         try {
             URL url = new URL(baseUrl);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
             InputStream stream = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(stream));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder buffer = new StringBuilder();
-            String line = "";
+            String line;
             while((line = reader.readLine()) != null)
                 buffer.append(line).append("\n");
                 reader.close();
@@ -55,6 +66,12 @@ public class ApiService {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return "";
+    }
+
+    public String getLastIp() {
+        manager.openDb();
+        manager.closeDb();
         return "";
     }
 }
