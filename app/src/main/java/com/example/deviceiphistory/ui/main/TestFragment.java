@@ -4,10 +4,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.deviceiphistory.ApiService;
@@ -17,6 +19,7 @@ public class TestFragment extends Fragment {
 
     TextView testText;
     Button testButton;
+    EditText inputText;
     ApiService apiService;
 
     public TestFragment() {
@@ -41,11 +44,16 @@ public class TestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_test, container, false);
         testText = view.findViewById(R.id.testText);
         testButton = view.findViewById(R.id.testButton);
+        inputText = view.findViewById(R.id.testInput);
         testButton.setOnClickListener(v -> click());
         return view;
     }
 
     private void click() {
-        testText.setText("lol");
+        String input = inputText.getText().toString();
+        if (input.length() == 0) return;
+        Log.d("Test", input);
+//        testText.setText("lol");
+//        apiService
     }
 }
