@@ -13,11 +13,9 @@
     <string name="get_history">Получить историю</string>
     <string name="clear_history">Очистить историю</string>
 
-    <string name="tabTest">Тест</string>
+    <string name="tab_test">Тест</string>
     <string name="test_button">Тестовая кнопка</string>
-
-    <string name="test_text_view">TextView</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_text_view">Вывод</string>
+    <string name="test_input_view">Ввод</string>
 
 </resources>

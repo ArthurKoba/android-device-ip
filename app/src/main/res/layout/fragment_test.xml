@@ -12,10 +12,11 @@
 
         <TextView
             android:id="@+id/testText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="207dp"
+            android:layout_height="27dp"
             android:layout_marginTop="104dp"
             android:text="@string/test_text_view"
+            android:gravity="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -24,14 +25,26 @@
 
         <Button
             android:id="@+id/testButton"
+            android:layout_width="202dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/test_button"
+            app:layout_constraintEnd_toEndOf="@+id/testText"
+            app:layout_constraintStart_toStartOf="@+id/testText"
+            app:layout_constraintTop_toBottomOf="@+id/testInput" />
+
+        <EditText
+            android:id="@+id/testInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="340dp"
-            android:text="@string/test_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="52dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="@string/test_input_view"
+            app:layout_constraintEnd_toEndOf="@+id/testText"
+            app:layout_constraintStart_toStartOf="@+id/testText"
+            app:layout_constraintTop_toBottomOf="@+id/testText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
