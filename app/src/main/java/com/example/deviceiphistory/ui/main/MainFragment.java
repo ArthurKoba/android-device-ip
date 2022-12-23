@@ -44,9 +44,12 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        initElements(view);
-        initDefaultTexts();
-        initHandlers();
+        actualAddressView = view.findViewById(R.id.actualIpAddressView);
+        lastAddressView = view.findViewById(R.id.lastIpAddressView);
+        updateAddressButton = view.findViewById(R.id.updateIpAddress);
+        setActualAddress(getString(R.string.unknown));
+        setLastAddress(getString(R.string.unknown));
+        updateAddressButton.setOnClickListener(updateView -> clickUpdateAddress());
         return view;
     }
 
@@ -64,21 +67,6 @@ public class MainFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     public void setLastAddress(String ip) {
         lastAddressView.setText(getString(R.string.last_Ip) + " " + ip);
-    }
-
-    private void initElements(View view) {
-        actualAddressView = view.findViewById(R.id.actualIpAddressView);
-        lastAddressView = view.findViewById(R.id.lastIpAddressView);
-        updateAddressButton = view.findViewById(R.id.updateIpAddress);
-    }
-
-    private void initDefaultTexts() {
-        setActualAddress(getString(R.string.unknown));
-        setLastAddress(getString(R.string.unknown));
-    }
-
-    private void initHandlers() {
-        updateAddressButton.setOnClickListener(view -> clickUpdateAddress());
     }
 
     private void clickUpdateAddress() {
