@@ -49,7 +49,7 @@ public class MainFragment extends Fragment {
         updateAddressButton = view.findViewById(R.id.updateIpAddress);
         setActualAddress(getString(R.string.unknown));
         setLastAddress(getString(R.string.unknown));
-        updateAddressButton.setOnClickListener(updateView -> clickUpdateAddress());
+        updateAddressButton.setOnClickListener(v -> clickUpdateAddress());
         return view;
     }
 
