@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IP адрес устройства</string>
+    <string name="app_name">История IP адресов устройства</string>
     <string name="tab_main">Главная</string>
     <string name="tab_history">История</string>
     <string name="tab_test">Тесты</string>
