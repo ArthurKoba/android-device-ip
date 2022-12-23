@@ -1,4 +1,4 @@
-![alt text](screenshot.png "Screenshot")
+![alt text](screenshot.jpg "Screenshot")
 
 # Device IP History (Java)
 
