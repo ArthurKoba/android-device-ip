@@ -1,9 +1,15 @@
 package com.example.deviceiphistory;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
+import android.util.Log;
 
-import com.example.deviceiphistory.db.DbManager;
+import com.example.deviceiphistory.db.DBConst;
+import com.example.deviceiphistory.db.DbHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,15 +19,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ApiService {
-    private final DbManager manager;
     private static ApiService INSTANCE = null;
-
+    private SQLiteDatabase db;
+    private final DbHelper dbHelper;
 
     private ApiService(Context context) {
-        manager = new DbManager(context);
+        dbHelper = new DbHelper(context);
     }
 
     public static ApiService newInstance(Context context) {
@@ -33,6 +41,7 @@ public class ApiService {
         return INSTANCE;
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private String request() {
         String baseUrl = "https://api.ipify.org/?format=json";
         HttpURLConnection connection = null;
@@ -69,9 +78,70 @@ public class ApiService {
         return "";
     }
 
+    public void openDb() {
+        db = dbHelper.getWritableDatabase();
+    }
+
+    public void closeDb() {
+        db.close();
+    }
+
     public String getLastIp() {
-        manager.openDb();
-        manager.closeDb();
+        try {
+            openDb();
+            List<String> listIp = getHistory();
+            for (String ip: listIp) {
+                Log.d("Api", "DB ip: " + ip);
+            }
+            if (!listIp.isEmpty()) {
+                return listIp.get(0);
+            }
+        } finally {
+            closeDb();
+        }
+
         return "";
+    }
+
+    public void writeNewIp(String ip) {
+        if (ip.length() == 0) return;
+        Log.d("Api", "write ip to db: " + ip);
+        try {
+            openDb();
+            ContentValues values = new ContentValues();
+            values.put(DBConst.COLUMN_NAME_ADDRESS, ip);
+            db.insert(DBConst.TABLE_NAME, null, values);
+        } finally {
+            closeDb();
+        }
+    }
+
+    public List<String> getHistory() {
+        try {
+            openDb();
+            List<String> listAddresses = new ArrayList<>();
+            Cursor cursor = db.query(DBConst.TABLE_NAME,null, null,
+                    null, null,null, null);
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String address = cursor.getString(
+                        cursor.getColumnIndex(DBConst.COLUMN_NAME_ADDRESS)
+                );
+                listAddresses.add(address);
+            }
+            cursor.close();
+            return listAddresses;
+        } finally {
+            closeDb();
+        }
+
+    }
+
+    public void clearHistory() {
+        try {
+            openDb();
+            db.execSQL(DBConst.CLEAR_TABLE);
+        } finally {
+            closeDb();
+        }
     }
 }
