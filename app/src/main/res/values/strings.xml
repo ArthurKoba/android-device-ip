@@ -12,6 +12,7 @@
 
     <string name="get_history">Получить историю</string>
     <string name="clear_history">Очистить историю</string>
+    <string name="history_empty">Список адресов пуст!</string>
 
     <string name="tab_test">Тест</string>
     <string name="test_button">Тестовая кнопка</string>
