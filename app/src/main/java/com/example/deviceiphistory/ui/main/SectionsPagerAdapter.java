@@ -1,6 +1,7 @@
 package com.example.deviceiphistory.ui.main;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +11,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.deviceiphistory.R;
+import com.example.deviceiphistory.ui.fragments.HistoryFragment;
+import com.example.deviceiphistory.ui.fragments.MainFragment;
+import com.example.deviceiphistory.ui.fragments.TestFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -21,10 +25,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[]{
             R.string.tab_main, R.string.tab_history, R.string.tab_test
     };
+
     private final Context context;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
-        super(fm);
+        super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.context = context;
     }
 
@@ -32,10 +37,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-//            case 0: return MainFragment.newInstance(this.context);
             case 1: return HistoryFragment.newInstance(context);
             case 2: return TestFragment.newInstance();
-            default: return MainFragment.newInstance(context);
+            case 0:
+            default: return MainFragment.newInstance();
         }
     }
 
