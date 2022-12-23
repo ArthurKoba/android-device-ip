@@ -1,3 +1,5 @@
+![alt text](screenshot.png "Screenshot")
+
 # Device IP History (Java)
 
 Используется: **Requests**, **JSON**, **SQLite**
